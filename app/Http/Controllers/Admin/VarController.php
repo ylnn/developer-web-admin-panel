@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Variable as VarResource;
+use App\Http\Resources\VariableResource as VarResource;
 use App\Http\Resources\VariableCollection as VarCollection;
 
 use App\Variable;
