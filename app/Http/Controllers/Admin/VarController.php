@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\VariableResource as VarResource;
 use App\Http\Resources\VariableCollection as VarCollection;
-
 use App\Variable;
 use App\Http\Requests\SaveVariable;
+use App\Scopes\VariableKeyScope;
 
 class VarController extends Controller
 {
@@ -35,9 +35,9 @@ class VarController extends Controller
         return new VarResource($variable);
     }
 
-    public function delete(Variable $variable)
+    public function delete($id)
     {
-        $variable->delete();
+        Variable::withoutGlobalScope(VariableKeyScope::class)->findOrFail($id)->delete();
         return response()->json(['status' => 'success']);
     }
 
