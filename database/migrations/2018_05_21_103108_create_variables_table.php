@@ -15,8 +15,8 @@ class CreateVariablesTable extends Migration
     {
         Schema::create('variables', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key')->unique()->index();
-            $table->string('value');
+            $table->string('key')->unique()->index()->nullable();
+            $table->string('value')->nullable();
             $table->timestamps();
         });
     }
