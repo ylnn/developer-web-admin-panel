@@ -8,6 +8,7 @@ use App\Http\Resources\Portfolio as PortfolioResource;
 use App\Http\Resources\PortfolioCollection;
 use App\Portfolio;
 use App\Http\Requests\SavePortfolio;
+use App\Scopes\PortfolioTitleScope;
 
 class PortfolioController extends Controller
 {
@@ -37,7 +38,7 @@ class PortfolioController extends Controller
 
     public function delete(Portfolio $portfolio)
     {
-        $portfolio->delete();
+        Portfolio::withoutGlobalScope(PortfolioTitleScope::class)->findOrFail($id)->delete();
         return response()->json(['status' => 'success']);
     }
 }
