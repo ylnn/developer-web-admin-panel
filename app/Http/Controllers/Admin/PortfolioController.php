@@ -36,7 +36,7 @@ class PortfolioController extends Controller
         return new PortfolioResource($portfolio);
     }
 
-    public function delete(Portfolio $portfolio)
+    public function delete($id)
     {
         Portfolio::withoutGlobalScope(PortfolioTitleScope::class)->findOrFail($id)->delete();
         return response()->json(['status' => 'success']);
