@@ -19,7 +19,7 @@ class VarController extends Controller
 
     public function create()
     {
-       return Variable::create()->id;
+       return response()->json(['id' => Variable::create()->id]);
     }
 
     public function edit(Variable $variable)
@@ -27,8 +27,9 @@ class VarController extends Controller
         return new VarResource($variable);
     }
 
-    public function save(Variable $variable, SaveVariable $request)
+    public function save($id, SaveVariable $request)
     {
+        $variable = Variable::withoutGlobalScope(VariableKeyScope::class)->findOrFail($id);
         $variable->key = $request->key;
         $variable->value = $request->value;
         $variable->save();
