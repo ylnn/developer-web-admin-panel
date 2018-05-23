@@ -19,7 +19,7 @@ class PortfolioController extends Controller
 
     public function create()
     {
-        return Portfolio::create()->id;
+        return response()->json(['id' => Portfolio::create()->id]);
     }
 
     public function edit(Portfolio $portfolio)
@@ -27,8 +27,9 @@ class PortfolioController extends Controller
         return new PortfolioResource($portfolio);
     }
 
-    public function save(Portfolio $portfolio, SavePortfolio $request)
+    public function save($id, SavePortfolio $request)
     {
+        $portfolio= Portfolio::withoutGlobalScope(PortfolioTitleScope::class)->findOrFail($id);
         $portfolio->title = $request->title;
         $portfolio->description = $request->description;
         $portfolio->url = $request->url;
