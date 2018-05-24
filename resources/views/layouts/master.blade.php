@@ -20,13 +20,13 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" tag="a" to="/about">
-                            About
+                        <router-link class="nav-link" tag="a" to="/variables/index">
+                            Variables
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" tag="a" to="/variables/index">
-                            Variables
+                        <router-link class="nav-link" tag="a" to="/portfolios/index">
+                            Portfolios
                         </router-link>
                     </li>
                 </ul>
