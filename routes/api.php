@@ -17,9 +17,9 @@ Route::group(['prefix' => 'manage', 'namespace' => 'Admin'], function () {
 
     Route::get('portfolios/all', 'PortfolioController@all');
     Route::post('portfolios/create', 'PortfolioController@create');
-    Route::get('portfolios/edit/{variable}', 'PortfolioController@edit');
-    Route::post('portfolios/save/{variable}', 'PortfolioController@save');
-    Route::delete('portfolios/delete/{variable}', 'PortfolioController@delete');
+    Route::get('portfolios/edit/{portfolio}', 'PortfolioController@edit');
+    Route::post('portfolios/save/{portfolio}', 'PortfolioController@save');
+    Route::delete('portfolios/delete/{portfolio}', 'PortfolioController@delete');
 
     Route::get('articles/all', function () {});
     Route::post('articles/create', function () {});
