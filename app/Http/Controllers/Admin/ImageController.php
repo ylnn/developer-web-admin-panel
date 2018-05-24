@@ -29,9 +29,8 @@ class ImageController extends Controller
         return new ImageResource($record);
     }
 
-    public function delete($id)
+    public function delete(Image $image)
     {
-        $image = Image::findOrFail($id);
         $image->delete();
         return response()->json(['status' => 'success']);
     }
