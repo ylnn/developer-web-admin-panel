@@ -6,10 +6,6 @@ let routes = [
         component: require('./views/Home')
     },
     {
-        path: '/about',
-        component: require('./views/About')
-    },
-    {
         path: '/variables/index',
         component: require('./views/variables/Index')
     }
