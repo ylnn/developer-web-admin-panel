@@ -16,13 +16,13 @@
                                 <div class="box" slot="body">
                                         <form action="" class="inline">
                                             <div class="row">
-                                                <div class="col-md-2 mb-3">
+                                                <!-- <div class="col-md-2 mb-3">
                                                     <label for="id">ID</label>
                                                     <input type="text" class="form-control" id="id" placeholder="" value="" v-model="inputId" disabled>
-                                                </div>
+                                                </div> -->
                                                 <div class="col-md-4 mb-3">
                                                     <label for="key">Key</label>
-                                                    <input type="text" class="form-control" id="key" placeholder="" value="" required v-model="inputKey" autofocus>
+                                                    <input type="text" class="form-control" ref="key" id="key" placeholder="" value="" required v-model="inputKey" autofocus>
                                                 </div>
                                                 <div class="col-md-5 mb-3">
                                                     <label for="value">Value</label>
@@ -34,24 +34,24 @@
                                             </div>
                                         </form>
 
-                                        <alert v-show="showingAlert"
+                                        <div v-show="showingAlert"
                                                 class="alert alert-warning"
                                                 >
                                         {{alertMessage}}
-                                        </alert>
+                                        </div>
                                     </div>
                             </modal>
                         </div>
                         <table class="table">
                             <thead>
-                                <th>Id</th>
+                                <!-- <th>Id</th> -->
                                 <th>Key</th>
                                 <th>Value</th>
                                 <th width="150">Action</th>
                             </thead>
                             <tbody>
                                 <tr  v-for="content in contents" v-bind:key="content.id">
-                                    <td>{{ content.id }}</td>
+                                    <!-- <td>{{ content.id }}</td> -->
                                     <td>{{ content.key }}</td>
                                     <td>{{ content.value }}</td>
                                     <td width="150">
@@ -95,16 +95,24 @@ import Modal from './../../components/Modal';
         created() {
             this.get_all();
             },
+
         methods: {
+
             // toggle form
             toggleForm: function () {
-                this.showingForm = !this.showingForm
+                this.showingForm = !this.showingForm;
             },
 
             // show form for new record, before show create and get id;
             showFormForNew: function() {
                 this.create_and_get_id(); 
                 this.showingForm = true; 
+                let self = this;
+                Vue.nextTick(function () {
+                    // DOM updated
+                    console.log('updated');
+                    self.$refs.key.focus(); 
+                });
             },
 
             // show alert
@@ -160,7 +168,7 @@ import Modal from './../../components/Modal';
                     })
                     .then(function (response) {
                         self.get_all();
-                        self.showAlert('Saved.')
+                        self.showAlert('Saved.', 'success')
                         setTimeout(() => {
                             self.clear_form();
                             self.toggleForm();

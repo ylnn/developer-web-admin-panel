@@ -16217,7 +16217,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.get_all();
     },
 
+
     methods: {
+
         // toggle form
         toggleForm: function toggleForm() {
             this.showingForm = !this.showingForm;
@@ -16227,6 +16229,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         showFormForNew: function showFormForNew() {
             this.create_and_get_id();
             this.showingForm = true;
+            var self = this;
+            Vue.nextTick(function () {
+                // DOM updated
+                console.log('updated');
+                self.$refs.key.focus();
+            });
         },
 
         // show alert
@@ -16284,7 +16292,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     value: self.inputValue
                 }).then(function (response) {
                     self.get_all();
-                    self.showAlert('Saved.');
+                    self.showAlert('Saved.', 'success');
                     setTimeout(function () {
                         self.clear_form();
                         self.toggleForm();
@@ -16387,40 +16395,6 @@ var render = function() {
                               { staticClass: "inline", attrs: { action: "" } },
                               [
                                 _c("div", { staticClass: "row" }, [
-                                  _c("div", { staticClass: "col-md-2 mb-3" }, [
-                                    _c("label", { attrs: { for: "id" } }, [
-                                      _vm._v("ID")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.inputId,
-                                          expression: "inputId"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        type: "text",
-                                        id: "id",
-                                        placeholder: "",
-                                        value: "",
-                                        disabled: ""
-                                      },
-                                      domProps: { value: _vm.inputId },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.inputId = $event.target.value
-                                        }
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
                                   _c("div", { staticClass: "col-md-4 mb-3" }, [
                                     _c("label", { attrs: { for: "key" } }, [
                                       _vm._v("Key")
@@ -16435,6 +16409,7 @@ var render = function() {
                                           expression: "inputKey"
                                         }
                                       ],
+                                      ref: "key",
                                       staticClass: "form-control",
                                       attrs: {
                                         type: "text",
@@ -16512,7 +16487,7 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "alert",
+                              "div",
                               {
                                 directives: [
                                   {
@@ -16532,8 +16507,7 @@ var render = function() {
                                 )
                               ]
                             )
-                          ],
-                          1
+                          ]
                         )
                       ]
                     )
@@ -16549,8 +16523,6 @@ var render = function() {
                 "tbody",
                 _vm._l(_vm.contents, function(content) {
                   return _c("tr", { key: content.id }, [
-                    _c("td", [_vm._v(_vm._s(content.id))]),
-                    _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(content.key))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(content.value))]),
@@ -16598,8 +16570,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("th", [_vm._v("Id")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Key")]),
       _vm._v(" "),
       _c("th", [_vm._v("Value")]),
