@@ -10415,6 +10415,10 @@ body {
   padding-top: 50px;
 }
 
+.panel-title {
+  font-weight: 100;
+}
+
 /* Modal CSS */
 
 .modal-mask {
