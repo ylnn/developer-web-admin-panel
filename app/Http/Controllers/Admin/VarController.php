@@ -30,7 +30,7 @@ class VarController extends Controller
     public function save($id, SaveVariable $request)
     {
         $variable = Variable::withoutGlobalScope(VariableKeyScope::class)->findOrFail($id);
-        $variable->key = $request->key;
+        $variable->key = str_slug($request->key);
         $variable->value = $request->value;
         $variable->save();
         return new VarResource($variable);
