@@ -29,7 +29,7 @@ Route::group(['prefix' => 'manage', 'namespace' => 'Admin'], function () {
 
     Route::get('images/all', 'ImageController@all');
     Route::post('images/save', 'ImageController@save');
-    Route::delete('images/delete/{id}', 'ImageController@delete');
+    Route::delete('images/delete/{image}', 'ImageController@delete');
 
 });
 
