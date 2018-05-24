@@ -7,7 +7,11 @@ let routes = [
     },
     {
         path: '/variables/index',
-        component: require('./views/variables/Index')
+        component: require('./views/variables/Variables')
+    },
+    {
+        path: '/portfolios/index',
+        component: require('./views/portfolios/Portfolios')
     }
 ];
 
