@@ -12,6 +12,9 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <div class="d-flex justify-content-center">
+                    <h1 class="panel-title">Developer Webpage Admin</h1>
+                </div>
             <div id="app">
                 <ul class="nav nav-pills" style="padding:15px;">
                     <li class="nav-item">
