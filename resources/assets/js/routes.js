@@ -12,6 +12,10 @@ let routes = [
     {
         path: '/portfolios/index',
         component: require('./views/portfolios/Portfolios')
+    },
+    {
+        path: '/images/index',
+        component: require('./views/images/Images')
     }
 ];
 
