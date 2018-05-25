@@ -32,6 +32,11 @@
                             Portfolios
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" tag="a" to="/images/index">
+                            Images
+                        </router-link>
+                    </li>
                 </ul>
                 {{-- Content View --}}
                 <router-view></router-view>
