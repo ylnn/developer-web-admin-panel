@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/image/{h}/{w}/{filename}','ImageCacheController@show')
+->where('h', '[0-9]+')
+->where('w', '[0-9]+')
+->where('filename', '[a-zA-Z0-9.]+')
+;
