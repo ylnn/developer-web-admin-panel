@@ -16762,8 +16762,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Modal__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Modal__);
 //
 //
 //
@@ -16800,59 +16798,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        modal: __WEBPACK_IMPORTED_MODULE_0__components_Modal___default.a
-    },
     data: function data() {
         return {
-            showingForm: false,
 
             showingAlert: false,
             alertMessage: 'message',
@@ -16872,26 +16821,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         this.get_all();
-        this.get_images();
     },
 
 
     methods: {
 
-        // toggle form
-        toggleForm: function toggleForm() {
-            this.showingForm = !this.showingForm;
-        },
-
         // show form for new record, before show create and get id;
         showFormForNew: function showFormForNew() {
-            this.create_and_get_id();
-            this.showingForm = true;
             var self = this;
-            Vue.nextTick(function () {
-                // DOM updated
-                self.$refs.title.focus();
-            });
+            self.$router.push({ name: 'portfolios_detail', params: { id: 0 } });
         },
 
         // show alert
@@ -16916,49 +16854,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
 
-        // CREATE - create and get created id
-        create_and_get_id: function create_and_get_id() {
-            var self = this;
-            axios.post('/api/manage/portfolios/create').then(function (response) {
-                self.form.id = response.data.id;
-            });
-        },
-
-        //EDIT - get details and fill form for edit content 
+        //Redirect to edit page
         edit: function edit(id) {
             var self = this;
-            axios.get('/api/manage/portfolios/edit/' + id).then(function (response) {
-                console.log(response.data.data);
-                if (self.showingForm == false) {
-                    self.toggleForm();
-                    var data = response.data.data;
-                    self.form.id = id;
-                    self.form.title = data.title;
-                    self.form.description = data.description;
-                    self.form.url = data.url;
-                }
-            });
-        },
-
-        // SAVE - save or update content with id
-        post_form: function post_form() {
-            var self = this;
-
-            if (self.form.id !== "" && self.form.title !== "" && self.form.description !== "") {
-                axios.post('/api/manage/portfolios/save/' + self.form.id, {
-                    id: self.form.id,
-                    title: self.form.title,
-                    description: self.form.description,
-                    url: self.form.url
-                }).then(function (response) {
-                    self.get_all();
-                    self.showAlert('Saved.', 'success');
-                    setTimeout(function () {
-                        self.clear_form();
-                        self.toggleForm();
-                    }, 1000);
-                });
-            }
+            self.$router.push({ name: 'portfolios_detail', params: { id: id } });
         },
 
         remove: function remove(id) {
@@ -16966,26 +16865,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.delete('/api/manage/portfolios/delete/' + id).then(function (response) {
                 self.get_all();
             });
-        },
-
-        clear_form: function clear_form() {
-            this.form.id = "";
-            this.form.title = "";
-            this.form.description = "";
-            this.form.url = "";
-        },
-
-        get_images: function get_images() {
-            var self = this;
-            axios.get('/api/manage/images/all').then(function (_ref2) {
-                var data = _ref2.data;
-                return self.remotePhotos = data.data;
-            });
-        },
-
-        add_image_to_editor: function add_image_to_editor(filename) {
-            console.log('image/50/50/' + filename);
         }
+
     }
 });
 
@@ -17014,239 +16895,6 @@ var render = function() {
                 [_vm._v("Add")]
               )
             ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              [
-                _vm.showingForm
-                  ? _c(
-                      "modal",
-                      {
-                        on: {
-                          close: function($event) {
-                            _vm.showingForm = false
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "h3",
-                          { attrs: { slot: "header" }, slot: "header" },
-                          [_vm._v("Portfolio")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "box",
-                            attrs: { slot: "body" },
-                            slot: "body"
-                          },
-                          [
-                            _c(
-                              "form",
-                              { staticClass: "inline", attrs: { action: "" } },
-                              [
-                                _c("div", { staticClass: "row" }, [
-                                  _c("div", { staticClass: "col-md-12 mb-3" }, [
-                                    _c("label", { attrs: { for: "title" } }, [
-                                      _vm._v("Title")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.title,
-                                          expression: "form.title"
-                                        }
-                                      ],
-                                      ref: "title",
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        type: "text",
-                                        id: "title",
-                                        placeholder: "",
-                                        value: "",
-                                        required: "",
-                                        autofocus: ""
-                                      },
-                                      domProps: { value: _vm.form.title },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.form,
-                                            "title",
-                                            $event.target.value
-                                          )
-                                        }
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-12 mb-3" }, [
-                                    _c(
-                                      "label",
-                                      { attrs: { for: "description" } },
-                                      [_vm._v("Description")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("textarea", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.description,
-                                          expression: "form.description"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: { cols: "30", rows: "10" },
-                                      domProps: { value: _vm.form.description },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.form,
-                                            "description",
-                                            $event.target.value
-                                          )
-                                        }
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-12 mb-3" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "row justify-content-start"
-                                      },
-                                      _vm._l(_vm.remotePhotos, function(file) {
-                                        return _c(
-                                          "div",
-                                          {
-                                            key: file.id,
-                                            staticClass: "col-1"
-                                          },
-                                          [
-                                            _c("span", [
-                                              _c("img", {
-                                                attrs: {
-                                                  src:
-                                                    "/image/50/50/" +
-                                                    file.filename,
-                                                  alt: ""
-                                                },
-                                                on: {
-                                                  click: function($event) {
-                                                    _vm.add_image_to_editor(
-                                                      file.filename
-                                                    )
-                                                  }
-                                                }
-                                              })
-                                            ])
-                                          ]
-                                        )
-                                      })
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "col-md-12 mb-3" }, [
-                                    _c("label", { attrs: { for: "url" } }, [
-                                      _vm._v("URL")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.url,
-                                          expression: "form.url"
-                                        }
-                                      ],
-                                      ref: "url",
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        type: "text",
-                                        id: "url",
-                                        placeholder: "",
-                                        value: ""
-                                      },
-                                      domProps: { value: _vm.form.url },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.form,
-                                            "url",
-                                            $event.target.value
-                                          )
-                                        }
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "col-md-3 mb-3 d-flex flex-column justify-content-end"
-                                    },
-                                    [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass: "btn btn-primary",
-                                          on: { click: _vm.post_form }
-                                        },
-                                        [_vm._v("Save")]
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.showingAlert,
-                                    expression: "showingAlert"
-                                  }
-                                ],
-                                staticClass: "alert alert-warning"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(_vm.alertMessage) +
-                                    "\n                                    "
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  : _vm._e()
-              ],
-              1
-            ),
             _vm._v(" "),
             _c("table", { staticClass: "table" }, [
               _vm._m(0),
@@ -17877,6 +17525,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             contents: [],
 
+            content: '',
+
             form: {
                 id: '',
                 title: '',
@@ -17885,13 +17535,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
 
             remotePhotos: [],
-            imageTextArea: 'image'
+            imageTextArea: ''
         };
     },
     mounted: function mounted() {
         var id = this.$route.params.id;
-        console.log('id: ' + id);
-        if (id !== null) {
+        if (id > 0) {
             // id var edit yapılacak
             console.log('id var edit yapılacak: ', id);
             this.edit(id);
@@ -18032,7 +17681,19 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "box", attrs: { slot: "body" }, slot: "body" },
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.form.id > 0,
+                      expression: "form.id > 0"
+                    }
+                  ],
+                  staticClass: "box",
+                  attrs: { slot: "body" },
+                  slot: "body"
+                },
                 [
                   _c("form", { staticClass: "inline", attrs: { action: "" } }, [
                     _c("div", { staticClass: "row" }, [
@@ -18180,7 +17841,7 @@ var render = function() {
                               }
                             ],
                             ref: "imageTextArea",
-                            staticStyle: { display: "none" },
+                            staticClass: "image-textarea",
                             attrs: { cols: "40" },
                             domProps: { value: _vm.imageTextArea },
                             on: {
