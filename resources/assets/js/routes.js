@@ -14,7 +14,7 @@ let routes = [
     {
         path: '/portfolios/index',
         name: 'portfolios',
-        component: require('./views/portfolios/Portfolios')
+        component: require('./views/portfolios/Portfolios'),
     },
     {
         path: '/portfolios/detail/:id',
