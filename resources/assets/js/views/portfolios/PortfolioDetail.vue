@@ -24,19 +24,25 @@
                                                 <div class="col-md-12 mb-3">
                                                     <label for="description">Description</label>
                                                     <!-- <input type="text" class="form-control" id="description" placeholder="" description="" required v-model="form.description"> -->
-                                                    <textarea class="form-control" cols="30" rows="10" v-model="form.description"></textarea>
-                                                    <!-- <wysiwyg v-model="form.description" /> -->
+                                                    <!-- <textarea class="form-control" cols="30" rows="10" v-model="form.description"></textarea> -->
+                                                    <wysiwyg v-model="form.description" />
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <div class="row justify-content-start">
+                                                        <div class="col-12">
+                                                            Selected photos
+                                                        </div>
                                                         <div class="col-1" v-for="file in remotePhotos" v-bind:key="file.id">
-                                                            <span> <img v-on:click="add_image_to_editor(file.filename)" :src="'/image/50/50/'+ file.filename" alt=""></span>
+                                                            <span><img v-on:click="add_image_to_editor(file.filename)" :src="'/image/50/50/'+ file.filename" alt=""></span>
                                                         </div>
                                                     </div>
-                                                    <div>
-                                                        <p>Select photo, copy and paste into text.</p>
-                                                        <textarea class="image-textarea" cols="40" v-model="imageTextArea" ref="imageTextArea"></textarea>
-                                                        <button class="btn btn-sm" v-on:click="copyImage">Copy</button>
+                                                    <div class="row justify-content-start">
+                                                        <div class="col-12">
+                                                            All Photos (click for add image to content)
+                                                        </div>
+                                                        <div class="col-1" v-for="file in remotePhotos" v-bind:key="file.id">
+                                                            <span><img v-on:click="add_image_to_editor(file.filename)" :src="'/image/50/50/'+ file.filename" alt=""></span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
@@ -190,18 +196,21 @@
                       .then(({data}) => self.remotePhotos  = data.data);
             },
 
-            copyImage(image) {
+            /* copyImage(image) {
                 let self = this;
                 self.$refs.imageTextArea.select();
                 document.execCommand('copy');
             },
 
             add_image_to_editor: function(filename) {
-                let image = '{image|'+filename+'|50|50|image}';
+                // let image = '{image|'+filename+'|50|50|image}';
+                // let image = '{image|'+filename+'|50|50|image}';
+
+                let image = '<img src="/image/50/50/'+filename+'" alt="">';
                 console.log(image);
                 this.imageTextArea = image;
                 console.log('resim seçildi');
-            }
+            } */
         }
     }
 </script>
