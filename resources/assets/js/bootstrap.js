@@ -13,6 +13,11 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+// vue wysiwyg 
+import wysiwyg from "vue-wysiwyg";
+Vue.use(wysiwyg, {}); // config is optional. more below
+// vue wysiwyg 
+
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
