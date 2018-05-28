@@ -17539,14 +17539,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-
             showingAlert: false,
             alertMessage: 'message',
             alertMessageStatus: 'warning',
 
             contents: [],
-
-            content: '',
 
             form: {
                 id: '',
@@ -17557,9 +17554,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             remotePhotos: [],
             selectedPhotos: [],
-            selectPhotoStatus: '',
+            selectPhotoStatus: ''
 
-            imageTextArea: ''
         };
     },
     mounted: function mounted() {

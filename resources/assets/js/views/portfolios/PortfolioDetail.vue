@@ -77,15 +77,12 @@
     export default {
         data: function() {
             return {
-                
                 showingAlert: false,
                 alertMessage : 'message',
                 alertMessageStatus : 'warning',
                 
                 contents : [],
 
-                content :'',
-                
                 form : {
                     id: '',
                     title: '',
@@ -97,7 +94,6 @@
                 selectedPhotos: [],
                 selectPhotoStatus : '',
 
-                imageTextArea: '',
             }
         },
         mounted() {
