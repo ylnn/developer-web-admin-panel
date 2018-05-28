@@ -17532,6 +17532,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -17554,6 +17556,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
 
             remotePhotos: [],
+            selectedPhotos: [],
+            selectPhotoStatus: '',
+
             imageTextArea: ''
         };
     },
@@ -17611,11 +17616,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var self = this;
             axios.get('/api/manage/portfolios/edit/' + id).then(function (response) {
                 var data = response.data.data;
-                console.log(data);
                 self.form.id = id;
                 self.form.title = data.title;
                 self.form.description = data.description;
                 self.form.url = data.url;
+                self.getRemoteSelectedPhotos();
             });
         },
 
@@ -17658,21 +17663,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var data = _ref.data;
                 return self.remotePhotos = data.data;
             });
-        }
-
-        /* copyImage(image) {
-            let self = this;
-            self.$refs.imageTextArea.select();
-            document.execCommand('copy');
         },
-         add_image_to_editor: function(filename) {
-            // let image = '{image|'+filename+'|50|50|image}';
-            // let image = '{image|'+filename+'|50|50|image}';
-             let image = '<img src="/image/50/50/'+filename+'" alt="">';
-            console.log(image);
-            this.imageTextArea = image;
-            console.log('resim seçildi');
-        } */
+
+        addImageToSelected: function addImageToSelected(file) {
+            if (this.selectedPhotos.indexOf(file) === -1) {
+                this.selectedPhotos.push(file);
+            }
+            this.updateSelectedPhotos();
+        },
+        removeImageFromSelected: function removeImageFromSelected(index) {
+            this.selectedPhotos.splice(index, 1);
+            this.updateSelectedPhotos();
+        },
+        updateSelectedPhotos: function updateSelectedPhotos() {
+            var _this2 = this;
+
+            var self = this;
+            var newArray = [];
+            self.selectedPhotos.forEach(function (element) {
+                newArray.push(element.id);
+            });
+            var postStr = newArray.toString();
+            axios.post('/api/manage/portfolios/images_sync/' + self.form.id, {
+                ids: postStr
+            }).then(function (response) {
+                return _this2.updateSelectPhotoStatus('Updated!');
+            }).catch(function (error) {
+                return _this2.updateSelectPhotoStatus('Error!');
+            });
+        },
+        getRemoteSelectedPhotos: function getRemoteSelectedPhotos() {
+            var self = this;
+            axios.get('/api/manage/portfolios/images/' + self.form.id).then(function (response) {
+                // console.log(response.data);
+                self.selectedPhotos = response.data;
+            }).catch(function (error) {
+                return console.log('remote images error');
+            });
+        },
+        updateSelectPhotoStatus: function updateSelectPhotoStatus(message) {
+            var _this3 = this;
+
+            this.selectPhotoStatus = message;
+            setTimeout(function () {
+                _this3.selectPhotoStatus = '';
+            }, 1500);
+        }
     }
 });
 
@@ -17813,12 +17849,17 @@ var render = function() {
                           { staticClass: "row justify-content-start" },
                           [
                             _c("div", { staticClass: "col-12" }, [
-                              _vm._v(
-                                "\n                                                        Selected photos\n                                                    "
-                              )
+                              _c("p", [
+                                _vm._v("Selected photos "),
+                                _c(
+                                  "span",
+                                  { staticClass: "badge badge-secondary" },
+                                  [_vm._v(_vm._s(_vm.selectPhotoStatus))]
+                                )
+                              ])
                             ]),
                             _vm._v(" "),
-                            _vm._l(_vm.remotePhotos, function(file) {
+                            _vm._l(_vm.selectedPhotos, function(file, index) {
                               return _c(
                                 "div",
                                 { key: file.id, staticClass: "col-1" },
@@ -17831,14 +17872,20 @@ var render = function() {
                                       },
                                       on: {
                                         click: function($event) {
-                                          _vm.add_image_to_editor(file.filename)
+                                          _vm.removeImageFromSelected(index)
                                         }
                                       }
                                     })
                                   ])
                                 ]
                               )
-                            })
+                            }),
+                            _vm._v(" "),
+                            _vm.selectedPhotos.length == 0
+                              ? _c("div", { staticClass: "col-6" }, [
+                                  _vm._v("None")
+                                ])
+                              : _vm._e()
                           ],
                           2
                         ),
@@ -17847,11 +17894,7 @@ var render = function() {
                           "div",
                           { staticClass: "row justify-content-start" },
                           [
-                            _c("div", { staticClass: "col-12" }, [
-                              _vm._v(
-                                "\n                                                        All Photos (click for add image to content)\n                                                    "
-                              )
-                            ]),
+                            _vm._m(0),
                             _vm._v(" "),
                             _vm._l(_vm.remotePhotos, function(file) {
                               return _c(
@@ -17866,7 +17909,7 @@ var render = function() {
                                       },
                                       on: {
                                         click: function($event) {
-                                          _vm.add_image_to_editor(file.filename)
+                                          _vm.addImageToSelected(file)
                                         }
                                       }
                                     })
@@ -17961,7 +18004,18 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("hr"),
+      _vm._v(" "),
+      _c("p", [_vm._v("Uploaded Photos (click for add image to content)")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
