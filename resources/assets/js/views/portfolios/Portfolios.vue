@@ -52,7 +52,6 @@
                     url: ''
                 },
 
-                remotePhotos: [],
             }
         },
         created() {
