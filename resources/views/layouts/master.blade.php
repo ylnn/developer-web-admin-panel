@@ -33,6 +33,11 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
+                        <router-link class="nav-link" tag="a" to="/articles/index">
+                            Articles
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
                         <router-link class="nav-link" tag="a" to="/images/index">
                             Images
                         </router-link>
