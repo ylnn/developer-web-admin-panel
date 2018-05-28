@@ -8,11 +8,12 @@
                     <div class="card-body">
                         
                             <div >
-                                <h3 slot="header">Article Detail</h3>
                                 <div class="box" slot="body" v-show="form.id > 0">
                                         <form action="" class="inline">
                                             <div class="row">
-                                                
+                                                <div class="col-md-12 mb-3">
+                                                    <button class="btn btn-secondary" v-on:click="$router.go(-1)">Back</button> 
+                                                </div>
                                                 <div class="col-md-3 mb-3">
                                                     <label for="id">ID</label>
                                                     <input type="text" class="form-control" disabled="disabled" ref="id" id="id" placeholder="" value="" required v-model="form.id" autofocus>
@@ -49,17 +50,17 @@
                                                     <label for="url">URL</label>
                                                     <input type="text" class="form-control" ref="url" id="url" placeholder="" value="" v-model="form.url">
                                                 </div>
-                                                <div class="col-md-3 mb-3 d-flex flex-column justify-content-end">
+                                                <div class="col-md-12 mb-3" v-show="showingAlert">
+                                                    <div class="alert alert-warning">{{alertMessage}}</div>
+                                                </div>
+                                                <div class="col-md-3 mb-3 d-flex flex-row justify-content-around">
                                                     <button class="btn btn-primary" @click="post_form">Save</button>
+                                                    <button class="btn btn-secondary" v-on:click="$router.go(-1)">Back</button> 
                                                 </div>
                                             </div>
                                         </form>
 
-                                        <div v-show="showingAlert"
-                                                class="alert alert-warning"
-                                                >
-                                        {{alertMessage}}
-                                        </div>
+                                        
                                     </div>
                             </div>
                         
