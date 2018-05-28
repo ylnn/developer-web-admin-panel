@@ -8,14 +8,14 @@
                     <div class="card-body">
                         
                             <div >
-                                <h3 slot="header">Portfolio</h3>
+                                <h3 slot="header">Portfolio Detail</h3>
                                 <div class="box" slot="body" v-show="form.id > 0">
                                         <form action="" class="inline">
                                             <div class="row">
                                                 
-                                                <div class="col-md-12 mb-3">
+                                                <div class="col-md-3 mb-3">
                                                     <label for="id">ID</label>
-                                                    <input type="text" class="form-control" ref="id" id="id" placeholder="" value="" required v-model="form.id" autofocus>
+                                                    <input type="text" class="form-control" disabled="disabled" ref="id" id="id" placeholder="" value="" required v-model="form.id" autofocus>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <label for="title">Title</label>
@@ -23,8 +23,6 @@
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <label for="description">Description</label>
-                                                    <!-- <input type="text" class="form-control" id="description" placeholder="" description="" required v-model="form.description"> -->
-                                                    <!-- <textarea class="form-control" cols="30" rows="10" v-model="form.description"></textarea> -->
                                                     <wysiwyg v-model="form.description" />
                                                 </div>
                                                 <div class="col-md-12 mb-3">

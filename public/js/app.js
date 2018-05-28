@@ -16822,9 +16822,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: '',
                 description: '',
                 url: ''
-            },
+            }
 
-            remotePhotos: []
         };
     },
     created: function created() {
@@ -17532,8 +17531,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -17727,7 +17724,7 @@ var render = function() {
           _c("div", { staticClass: "card-body" }, [
             _c("div", [
               _c("h3", { attrs: { slot: "header" }, slot: "header" }, [
-                _vm._v("Portfolio")
+                _vm._v("Portfolio Detail")
               ]),
               _vm._v(" "),
               _c(
@@ -17748,7 +17745,7 @@ var render = function() {
                 [
                   _c("form", { staticClass: "inline", attrs: { action: "" } }, [
                     _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-md-12 mb-3" }, [
+                      _c("div", { staticClass: "col-md-3 mb-3" }, [
                         _c("label", { attrs: { for: "id" } }, [_vm._v("ID")]),
                         _vm._v(" "),
                         _c("input", {
@@ -17764,6 +17761,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
+                            disabled: "disabled",
                             id: "id",
                             placeholder: "",
                             value: "",
