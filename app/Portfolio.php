@@ -13,4 +13,9 @@ class Portfolio extends Model
 
         static::addGlobalScope(new PortfolioTitleScope);
     }
+
+    public function images()
+    {
+        return $this->belongsToMany('App\Image');
+    }
 }
