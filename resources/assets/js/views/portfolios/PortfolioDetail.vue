@@ -30,18 +30,20 @@
                                                 <div class="col-md-12 mb-3">
                                                     <div class="row justify-content-start">
                                                         <div class="col-12">
-                                                            Selected photos
+                                                            <p>Selected photos <span class="badge badge-secondary" >{{selectPhotoStatus}}</span></p>
                                                         </div>
-                                                        <div class="col-1" v-for="file in remotePhotos" v-bind:key="file.id">
-                                                            <span><img v-on:click="add_image_to_editor(file.filename)" :src="'/image/50/50/'+ file.filename" alt=""></span>
+                                                        <div class="col-1" v-for="(file, index) in selectedPhotos" v-bind:key="file.id">
+                                                            <span><img v-on:click="removeImageFromSelected(index)" :src="'/image/50/50/'+ file.filename" alt=""></span>
                                                         </div>
+                                                        <div class="col-6" v-if="selectedPhotos.length == 0">None</div>
                                                     </div>
                                                     <div class="row justify-content-start">
                                                         <div class="col-12">
-                                                            All Photos (click for add image to content)
+                                                            <hr>
+                                                                <p>Uploaded Photos (click for add image to content)</p>
                                                         </div>
                                                         <div class="col-1" v-for="file in remotePhotos" v-bind:key="file.id">
-                                                            <span><img v-on:click="add_image_to_editor(file.filename)" :src="'/image/50/50/'+ file.filename" alt=""></span>
+                                                            <span><img v-on:click="addImageToSelected(file)" :src="'/image/50/50/'+ file.filename" alt=""></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -92,6 +94,9 @@
                 },
 
                 remotePhotos: [],
+                selectedPhotos: [],
+                selectPhotoStatus : '',
+
                 imageTextArea: '',
             }
         },
@@ -107,6 +112,7 @@
             }
 
             this.get_images();
+            
         },
 
         methods: {
@@ -147,11 +153,11 @@
                 axios.get(`/api/manage/portfolios/edit/${id}`)
                       .then(function (response) {
                             let data = response.data.data;
-                            console.log(data);
                             self.form.id = id;
                             self.form.title = data.title;
                             self.form.description = data.description;
                             self.form.url = data.url;
+                            self.getRemoteSelectedPhotos();
                       });
             },
 
@@ -196,21 +202,50 @@
                       .then(({data}) => self.remotePhotos  = data.data);
             },
 
-            /* copyImage(image) {
-                let self = this;
-                self.$refs.imageTextArea.select();
-                document.execCommand('copy');
+            addImageToSelected(file) {
+                if(this.selectedPhotos.indexOf(file) === -1) {
+                    this.selectedPhotos.push(file);
+                }
+                this.updateSelectedPhotos();
             },
 
-            add_image_to_editor: function(filename) {
-                // let image = '{image|'+filename+'|50|50|image}';
-                // let image = '{image|'+filename+'|50|50|image}';
+            removeImageFromSelected(index) {
+                this.selectedPhotos.splice(index, 1);
+                this.updateSelectedPhotos();
+            },
 
-                let image = '<img src="/image/50/50/'+filename+'" alt="">';
-                console.log(image);
-                this.imageTextArea = image;
-                console.log('resim seçildi');
-            } */
+            updateSelectedPhotos() {
+                let self = this;
+                let newArray = [];
+                self.selectedPhotos.forEach(function(element){
+                    newArray.push(element.id);
+                })
+                let postStr = newArray.toString();
+                axios.post('/api/manage/portfolios/images_sync/'+self.form.id, {
+                    ids: postStr
+                })
+                .then(response => this.updateSelectPhotoStatus('Updated!'))
+                .catch(error => this.updateSelectPhotoStatus('Error!'))
+                ;
+            },
+
+            getRemoteSelectedPhotos() {
+                let self = this;
+                axios.get('/api/manage/portfolios/images/'+self.form.id)
+                .then(function(response) {
+                    // console.log(response.data);
+                    self.selectedPhotos = response.data;
+                })
+                .catch(error => console.log('remote images error'));
+
+            },
+
+            updateSelectPhotoStatus(message){
+                this.selectPhotoStatus = message;
+                setTimeout(() => {
+                    this.selectPhotoStatus = '';
+                }, 1500);
+            }
         }
     }
 </script>
