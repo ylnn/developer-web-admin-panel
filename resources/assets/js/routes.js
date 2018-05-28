@@ -22,6 +22,16 @@ let routes = [
         component: require('./views/portfolios/PortfolioDetail')
     },
     {
+        path: '/articles/index',
+        name: 'articles',
+        component: require('./views/articles/Articles'),
+    },
+    {
+        path: '/articles/detail/:id',
+        name: 'articles_detail',
+        component: require('./views/articles/ArticleDetail')
+    },
+    {
         path: '/images/index',
         name: 'images',
         component: require('./views/images/Images')
