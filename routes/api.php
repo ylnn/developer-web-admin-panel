@@ -24,11 +24,13 @@ Route::group(['prefix' => 'manage', 'namespace' => 'Admin'], function () {
     Route::get('portfolios/images/{portfolio}', 'PortfolioController@images');
     Route::post('portfolios/images_sync/{portfolio}', 'PortfolioController@imageSync');
 
-    Route::get('articles/all', function () {});
-    Route::post('articles/create', function () {});
-    Route::get('articles/edit/{id}', function () {});
-    Route::post('articles/save/{id}', function () {});
-    Route::delete('articles/delete/{id}', function () {});
+    Route::get('articles/all', 'ArticleController@all');
+    Route::post('articles/create', 'ArticleController@create');
+    Route::get('articles/edit/{id}', 'ArticleController@edit');
+    Route::post('articles/save/{id}', 'ArticleController@save');
+    Route::delete('articles/delete/{id}', 'ArticleController@delete');
+    Route::get('articles/images/{portfolio}', 'ArticleController@images');
+    Route::post('articles/images_sync/{portfolio}', 'ArticleController@imageSync');
 
     Route::get('images/all', 'ImageController@all');
     Route::post('images/save', 'ImageController@save');
