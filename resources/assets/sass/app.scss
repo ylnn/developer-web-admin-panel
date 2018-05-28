@@ -4,6 +4,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//WYSIWYG VUE
+@import "~vue-wysiwyg/dist/vueWysiwyg.css";
+
 body {
   padding-top: 50px;
 }
@@ -11,6 +14,16 @@ body {
 .panel-title {
   font-weight: 100;
 }
+
+
+.image-textarea {
+    border:1px solid silver; 
+    padding:10px; 
+    height:50px;
+    width: 500px;
+    font-size: 10px;
+}
+
 
 /* Modal CSS */
 .modal-mask {
