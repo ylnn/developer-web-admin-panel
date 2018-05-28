@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Scopes\PortfolioTitleScope;
+use App\Scopes\ArticleTitleScope;
 
 class Article extends Model
 {
@@ -11,7 +11,7 @@ class Article extends Model
     {
         parent::boot();
 
-        static::addGlobalScope(new PortfolioTitleScope);
+        static::addGlobalScope(new ArticleTitleScope);
     }
 
     public function images()
