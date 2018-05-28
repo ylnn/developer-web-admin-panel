@@ -21,6 +21,9 @@ Route::group(['prefix' => 'manage', 'namespace' => 'Admin'], function () {
     Route::post('portfolios/save/{portfolio}', 'PortfolioController@save');
     Route::delete('portfolios/delete/{portfolio}', 'PortfolioController@delete');
 
+    Route::get('portfolios/images/{portfolio}', 'PortfolioController@images');
+    Route::post('portfolios/images_sync/{portfolio}', 'PortfolioController@imageSync');
+
     Route::get('articles/all', function () {});
     Route::post('articles/create', function () {});
     Route::get('articles/edit/{id}', function () {});
