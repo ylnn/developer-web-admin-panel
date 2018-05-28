@@ -42,4 +42,26 @@ class PortfolioController extends Controller
         Portfolio::withoutGlobalScope(PortfolioTitleScope::class)->findOrFail($id)->delete();
         return response()->json(['status' => 'success']);
     }
+
+    public function images(Request $request, Portfolio $portfolio)
+    {
+       return $portfolio->images; 
+    }
+
+    public function imageSync(Request $request, Portfolio $portfolio)
+    {
+        $this->validate($request, [
+            'ids' => 'string|nullable'
+        ]);
+
+        $ids = $request->ids;
+
+        $array = [];
+        if(!empty($ids)){
+            $array = explode(',', $ids);
+        }
+
+        $portfolio->images()->sync($array);
+        return $this->images($request, $portfolio);
+    }
 }
