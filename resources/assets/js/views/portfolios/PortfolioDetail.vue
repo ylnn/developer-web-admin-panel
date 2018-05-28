@@ -40,7 +40,7 @@
                                                     <div class="row justify-content-start">
                                                         <div class="col-12">
                                                             <hr>
-                                                                <p>Uploaded Photos (click for add image to content)</p>
+                                                                <p>Uploaded Photos (click for add)</p>
                                                         </div>
                                                         <div class="col-1" v-for="file in remotePhotos" v-bind:key="file.id">
                                                             <span><img v-on:click="addImageToSelected(file)" :src="'/image/50/50/'+ file.filename" alt=""></span>

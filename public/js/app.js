@@ -18012,7 +18012,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-12" }, [
       _c("hr"),
       _vm._v(" "),
-      _c("p", [_vm._v("Uploaded Photos (click for add image to content)")])
+      _c("p", [_vm._v("Uploaded Photos (click for add)")])
     ])
   }
 ]
