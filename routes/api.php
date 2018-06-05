@@ -15,9 +15,8 @@ Route::group(['prefix' => 'manage', 'namespace' => 'Admin' ,'middleware' => 'aut
     Route::get('portfolios/edit/{portfolio}', 'PortfolioController@edit');
     Route::post('portfolios/save/{portfolio}', 'PortfolioController@save');
     Route::delete('portfolios/delete/{portfolio}', 'PortfolioController@delete');
-
     Route::get('portfolios/images/{portfolio}', 'PortfolioController@images');
-    Route::post('portfolios/images_sync/{portfolio}', 'PortfolioController@imageSync');
+    Route::post('portfolios/images_sync/{portfolio_id}', 'PortfolioController@imageSync');
 
     Route::get('articles/all', 'ArticleController@all');
     Route::post('articles/create', 'ArticleController@create');
@@ -25,7 +24,7 @@ Route::group(['prefix' => 'manage', 'namespace' => 'Admin' ,'middleware' => 'aut
     Route::post('articles/save/{article}', 'ArticleController@save');
     Route::delete('articles/delete/{article}', 'ArticleController@delete');
     Route::get('articles/images/{article}', 'ArticleController@images');
-    Route::post('articles/images_sync/{article}', 'ArticleController@imageSync');
+    Route::post('articles/images_sync/{article_id}', 'ArticleController@imageSync');
 
     Route::get('images/all', 'ImageController@all');
     Route::post('images/save', 'ImageController@save');
