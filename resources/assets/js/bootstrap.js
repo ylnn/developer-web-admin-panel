@@ -26,3 +26,9 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+let api_token = document.querySelector('input[name="token"]').value;
+
+if(api_token) {
+    window.axios.defaults.headers.Authorization = 'Bearer '+ api_token;
+}
