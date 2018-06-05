@@ -43,13 +43,16 @@ class ArticleController extends Controller
         return response()->json(['status' => 'success']);
     }
 
-    public function images(Request $request, Article $article)
+    public function images(Request $request, $article_id)
     {
-       return $article->images; 
+        $article = Article::withoutGlobalScope(ArticleTitleScope::class)->find($article_id);
+        return $article->images; 
     }
 
-    public function imageSync(Request $request, Article $article)
+    public function imageSync(Request $request, $article_id)
     {
+        $article = Article::withoutGlobalScope(ArticleTitleScope::class)->find($article_id);
+
         $this->validate($request, [
             'ids' => 'string|nullable'
         ]);
@@ -62,6 +65,6 @@ class ArticleController extends Controller
         }
 
         $article->images()->sync($array);
-        return $this->images($request, $article);
+        return $this->images($request, $article->id);
     }
 }

@@ -43,13 +43,17 @@ class PortfolioController extends Controller
         return response()->json(['status' => 'success']);
     }
 
-    public function images(Request $request, Portfolio $portfolio)
+    public function images(Request $request, $portfolio_id)
     {
+       $portfolio = Portfolio::withoutGlobalScope(PortfolioTitleScope::class)->find($portfolio_id);
+
        return $portfolio->images; 
     }
 
-    public function imageSync(Request $request, Portfolio $portfolio)
+    public function imageSync(Request $request, $portfolio_id)
     {
+        $portfolio = Portfolio::withoutGlobalScope(PortfolioTitleScope::class)->find($portfolio_id);
+
         $this->validate($request, [
             'ids' => 'string|nullable'
         ]);
@@ -62,6 +66,6 @@ class PortfolioController extends Controller
         }
 
         $portfolio->images()->sync($array);
-        return $this->images($request, $portfolio);
+        return $this->images($request, $portfolio->id);
     }
 }
