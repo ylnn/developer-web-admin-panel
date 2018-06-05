@@ -1,12 +1,7 @@
 <?php
 use Illuminate\Http\Request;
 
-
-Route::get('/', function (Request $request) {
-    return 'hello!';
-});
-
-Route::group(['prefix' => 'manage', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'manage', 'namespace' => 'Admin' ,'middleware' => 'auth:api'], function () {
     
     Route::get('variables/all', 'VarController@all');
     Route::post('variables/create', 'VarController@create');
