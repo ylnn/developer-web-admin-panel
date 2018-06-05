@@ -26,6 +26,10 @@ class VariablesTableSeeder extends Seeder
             'value' => 'footer-text'
         ]);
         DB::table('variables')->insert([
+            'key' => 'image-size',
+            'value' => '300x500'
+        ]);
+        DB::table('variables')->insert([
                 'key' => 'email',
                 'value' => ''
         ]);
