@@ -1,0 +1,36 @@
+body {
+    font-weight: 200;
+}
+
+
+.header {
+    font-size: 30px;
+    padding-top: 50px;
+    margin-bottom: 30px;
+}
+
+.header a {
+    text-decoration: none;
+    color: #000;
+}
+
+.article {
+    padding-top: 50px;
+}
+
+.title {
+    font-size: 27px;
+    margin-bottom: 5px;
+}
+
+.date {
+    margin-bottom: 10px;
+    color: grey;
+}
+.read-more {
+    margin-top: 10px;
+}
+
+.footer {
+    margin: 50px;
+}
