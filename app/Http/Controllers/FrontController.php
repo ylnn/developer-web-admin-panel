@@ -22,6 +22,8 @@ class FrontController extends Controller
 
         $replaced = $repo->mapImages($variables, $article);
 
-        return view('front.article', compact('article', 'variables', 'replaced'));
+        $title = $article->title;
+
+        return view('front.article', compact('article', 'variables', 'replaced', 'title'));
     }
 }
