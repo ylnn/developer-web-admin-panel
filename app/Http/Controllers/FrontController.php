@@ -19,7 +19,6 @@ class FrontController extends Controller
     {
         $variables = Variable::all();
 
-
         $image_size = $variables->where('key', 'image-size')->first()->value ?? '';
         
         if(!$image_size){
@@ -38,10 +37,29 @@ class FrontController extends Controller
             return "<img src=\"../image/$image_size/$filename\">";
         });
 
+        $new_images = $article->images;
 
         $content = $article->description;
 
-        $replaced = preg_replace_array('/(\[image(|.*?)(|.*?)\])/', $images->toArray(), $content);
+        $i = 0;
+
+        $newContent = preg_replace_callback("/\[image\|?(.*?)\]/", function($matches) use ($new_images, $image_size) {
+            
+            global $i;
+            $i++;
+
+            if(isset($new_images[$i-1])) {
+                $filename =  $new_images[$i-1]->filename;
+                $alt = $matches[1] ?? '';
+                $image_url = url('image');
+                return "<img src=\"$image_url/$image_size/$filename\" alt=\"$alt\">";
+            }
+            return '!!! IMAGE NOT FOUND !!!';
+            
+            
+        }, $content);
+
+        $replaced = preg_replace_array('/(\[image(|.*?)(|.*?)\])/', $images->toArray(), $newContent);
         
         return view('front.article', compact('article', 'variables', 'replaced'));
     }
