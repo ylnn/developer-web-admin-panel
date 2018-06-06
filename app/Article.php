@@ -18,4 +18,10 @@ class Article extends Model
     {
         return $this->belongsToMany('App\Image');
     }
+    
+    public function getSummaryAttribute()
+    {
+        // strip tags, str_limit, remove image tags with preg_replace...
+        return preg_replace('/\[image\|?(.*?)\]/', '', str_limit(strip_tags($this->description), 300));
+    }
 }
