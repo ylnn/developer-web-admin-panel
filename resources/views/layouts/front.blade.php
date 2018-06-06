@@ -21,8 +21,10 @@
             
         <div class="header">
             <div class="row d-flex justify-content-between">
-                <div class="col-3">
-                    <div class="header-left"><a href="{{ route('main') }}">Uğur Bölge</a></div>
+                <div class="col-5">
+                    <div class="header-left"><a href="{{ route('main') }}">{{$variables->where('key', 'site-brand')->first()->value ?? ''}}</a>
+                        <p class="laravel-developer-header">Laravel Software Developer</p>
+                    </div>
                 </div>
                 <div class="col-4 d-flex justify-content-end">
                     <div class="header-right">
