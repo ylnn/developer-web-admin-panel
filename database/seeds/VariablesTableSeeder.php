@@ -22,6 +22,10 @@ class VariablesTableSeeder extends Seeder
                 'value' => 'site-title'
         ]);
         DB::table('variables')->insert([
+                'key' => 'site-sub-title',
+                'value' => 'site-sub-title'
+        ]);
+        DB::table('variables')->insert([
             'key' => 'footer-text',
             'value' => 'footer-text'
         ]);
