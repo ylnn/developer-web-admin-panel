@@ -69,7 +69,7 @@ class ImageRepository
                 $filename =  $articleImages[$i-1]->filename;
                 $alt = $matches[1] ?? '';
                 $image_url = url('image');
-                return "<img src=\"$image_url/$imageSize/$filename\" alt=\"$alt\">";
+                return "<img class=\"img-fluid\" src=\"$image_url/$imageSize/$filename\" alt=\"$alt\">";
             }
             return '!!! IMAGE NOT FOUND !!!';
         }, $this->article->description);   
