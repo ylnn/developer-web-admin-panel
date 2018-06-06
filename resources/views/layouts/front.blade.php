@@ -23,26 +23,49 @@
             <div class="row d-flex justify-content-between">
                 <div class="col-5">
                     <div class="header-left"><a href="{{ route('main') }}">{{$variables->where('key', 'site-brand')->first()->value ?? ''}}</a>
-                        <p class="laravel-developer-header">Laravel Software Developer</p>
+                        <p class="laravel-developer-header"><a href="{{ route('main') }}">{{$variables->where('key', 'site-sub-title')->first()->value ?? ''}}</a></p>
                     </div>
                 </div>
                 <div class="col-4 d-flex justify-content-end">
                     <div class="header-right">
-                        <a href="{{$variables->where('key', 'email')->first()->value ?? ''}}">
-                                <img width="30" src="/images/mail.svg" alt="Mail">
-                        </a>
-                        <a href="{{$variables->where('key', 'behance')->first()->value ?? ''}}">
-                            <img width="30" src="/images/behance.svg" alt="Behance">
-                        </a>
-                        <a href="{{$variables->where('key', 'dribbble')->first()->value ?? ''}}">
-                            <img width="30" src="/images/dribbble.svg" alt="Dribbble">
-                        </a>
-                        <a href="{{$variables->where('key', 'linkedin')->first()->value ?? ''}}">
-                            <img width="30" src="/images/linkedin.svg" alt="Linkedin">
-                        </a>
-                        <a href="{{$variables->where('key', 'twitter')->first()->value ?? ''}}">
-                            <img width="30" src="/images/twitter.svg" alt="Twitter">
-                        </a>
+                        @php 
+                            $email    = $variables->where('key', 'email')->first()->value ?? '';
+                            $behance  = $variables->where('key', 'behance')->first()->value ?? '';
+                            $dribbble = $variables->where('key', 'dribbble')->first()->value ?? '';
+                            $linkedin = $variables->where('key', 'linkedin')->first()->value ?? '';
+                            $twitter  = $variables->where('key', 'twitter')->first()->value ?? '';
+                            $github   = $variables->where('key', 'github')->first()->value ?? '';
+                        @endphp
+                        @if(!empty($email))
+                            <a href="{{$email}}">
+                                    <img width="30" src="/images/mail.svg" alt="Mail">
+                            </a>
+                        @endif
+                        @if(!empty($github))
+                            <a href="{{$github}}">
+                                    <img width="30" src="/images/github.svg" alt="Mail">
+                            </a>
+                        @endif
+                        @if(!empty($behance))
+                            <a href="{{$behance}}">
+                                <img width="30" src="/images/behance.svg" alt="Behance">
+                            </a>
+                        @endif
+                        @if(!empty($dribbble))
+                            <a href="{{$dribbble}}">
+                                <img width="30" src="/images/dribbble.svg" alt="Dribbble">
+                            </a>
+                        @endif
+                        @if(!empty($linkedin))
+                            <a href="{{$linkedin}}">
+                                <img width="30" src="/images/linkedin.svg" alt="Linkedin">
+                            </a>
+                        @endif
+                        @if(!empty($twitter))
+                            <a href="{{$twitter}}">
+                                <img width="30" src="/images/twitter.svg" alt="Twitter">
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
