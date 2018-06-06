@@ -32,7 +32,7 @@ class ArticleController extends Controller
         $article= Article::withoutGlobalScope(ArticleTitleScope::class)->findOrFail($id);
         $article->title = $request->title;
         $article->description = $request->description;
-        $article->url = $request->url;
+        $article->url = (empty($request->url)) ? str_slug($request->title) : $request->url;
         $article->save();
         return new ArticleResource($article);
     }

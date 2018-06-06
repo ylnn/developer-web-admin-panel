@@ -32,7 +32,7 @@ class PortfolioController extends Controller
         $portfolio= Portfolio::withoutGlobalScope(PortfolioTitleScope::class)->findOrFail($id);
         $portfolio->title = $request->title;
         $portfolio->description = $request->description;
-        $portfolio->url = $request->url;
+        $portfolio->url = (empty($request->url)) ? str_slug($request->title) : $request->url;
         $portfolio->save();
         return new PortfolioResource($portfolio);
     }
