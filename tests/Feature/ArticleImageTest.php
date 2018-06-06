@@ -16,7 +16,7 @@ class ArticleImageTest extends TestCase
      */
     public function test_is_image_show_in_article_detail_page()
     {
-        $article = Article::find(5);
+        $article = Article::find(12);
         $response = $this->get('/article/'.$article->id);
 
         //test [image] tag is in body
