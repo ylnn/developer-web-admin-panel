@@ -24,6 +24,18 @@
                 <div class="col-5">
                     <div class="header-left"><a href="{{ route('main') }}">{{$variables->where('key', 'site-brand')->first()->value ?? ''}}</a>
                         <p class="laravel-developer-header"><a href="{{ route('main') }}">{{$variables->where('key', 'site-sub-title')->first()->value ?? ''}}</a></p>
+                        <div style="font-size:15px;">
+                            <span class="badge badge-secondary">Laravel</span> 
+                            <span class="badge badge-secondary">PHP</span>
+                            <span class="badge badge-secondary">Mysql</span>
+                            <span class="badge badge-secondary">VueJS</span>
+                            <span class="badge badge-secondary">OOP</span>
+                            <span class="badge badge-secondary">Git</span>
+                            <span class="badge badge-secondary">Jira</span>
+                            <span class="badge badge-secondary">Golang (learning)</span>
+                            <span class="badge badge-secondary">Remote Experience</span>
+                            <span class="badge badge-secondary">Experienced 3+ years</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-4 d-flex justify-content-end">
