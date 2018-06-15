@@ -9,6 +9,12 @@ Route::group(['prefix' => 'manage', 'namespace' => 'Admin' ,'middleware' => 'aut
     Route::post('variables/save/{variable}', 'VarController@save');
     Route::delete('variables/delete/{variable}', 'VarController@delete');
 
+    Route::get('skills/all', 'SkillController@all');
+    Route::post('skills/create', 'SkillController@create');
+    Route::get('skills/edit/{skill}', 'SkillController@edit');
+    Route::post('skills/save/{skill}', 'SkillController@save');
+    Route::delete('skills/delete/{skill}', 'SkillController@delete');
+
 
     Route::get('portfolios/all', 'PortfolioController@all');
     Route::post('portfolios/create', 'PortfolioController@create');
