@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Article;
 use App\Variable;
 use App\Http\Repositories\ImageRepository;
+use App\Skill;
 
 class FrontController extends Controller
 {
@@ -13,7 +14,8 @@ class FrontController extends Controller
     {
         $articles = Article::latest()->get();
         $variables = Variable::all();
-        return view('front.home', compact('articles', 'variables'));
+        $skills = Skill::query()->orderBy('order', 'ASC')->get();
+        return view('front.home', compact('articles', 'variables', 'skills'));
     }
 
     public function article(Article $article, ImageRepository $repo)
@@ -23,7 +25,9 @@ class FrontController extends Controller
         $replaced = $repo->mapImages($variables, $article);
 
         $title = $article->title;
+        
+        $skills = Skill::query()->orderBy('order', 'ASC')->get();
 
-        return view('front.article', compact('article', 'variables', 'replaced', 'title'));
+        return view('front.article', compact('article', 'variables', 'replaced', 'title', 'skills'));
     }
 }
