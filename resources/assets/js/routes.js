@@ -12,6 +12,11 @@ let routes = [
         component: require('./views/variables/Variables')
     },
     {
+        path: '/skills/index',
+        name: 'skills',
+        component: require('./views/skills/Skills')
+    },
+    {
         path: '/portfolios/index',
         name: 'portfolios',
         component: require('./views/portfolios/Portfolios'),
