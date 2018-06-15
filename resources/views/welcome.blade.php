@@ -18,6 +18,11 @@
                 </router-link>
             </li>
             <li class="nav-item">
+                <router-link class="nav-link" tag="a" to="/skills/index">
+                    Skills
+                </router-link>
+            </li>
+            <li class="nav-item">
                 <router-link class="nav-link" tag="a" to="/portfolios/index">
                     Portfolios
                 </router-link>
