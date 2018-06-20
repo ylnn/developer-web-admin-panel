@@ -19,6 +19,13 @@
                                                     <input type="text" class="form-control" disabled="disabled" ref="id" id="id" placeholder="" value="" required v-model="form.id" autofocus>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
+                                                    <label for="status">Status</label>
+                                                    <select class="form-control" v-model="form.status">
+                                                        <option value="draft">draft</option>
+                                                        <option value="publish">publish</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
                                                     <label for="title">Title</label>
                                                     <input type="text" class="form-control" ref="title" id="title" placeholder="" value="" required v-model="form.title" autofocus>
                                                 </div>
@@ -84,6 +91,7 @@
 
                 form : {
                     id: '',
+                    status: '',
                     title: '',
                     description: '',
                     url: ''
@@ -149,6 +157,7 @@
                       .then(function (response) {
                             let data = response.data.data;
                             self.form.id = id;
+                            self.form.status = data.status;
                             self.form.title = data.title;
                             self.form.description = data.description;
                             self.form.url = data.url;
@@ -163,6 +172,7 @@
                 if(self.form.id !== "" && self.form.title !== "" && self.form.description !== ""){
                     axios.post('/api/manage/articles/save/' + self.form.id, {
                         id: self.form.id,
+                        status: self.form.status,
                         title: self.form.title,
                         description: self.form.description,
                         url: self.form.url,

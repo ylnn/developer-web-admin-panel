@@ -18257,6 +18257,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -18363,6 +18365,8 @@ var render = function() {
                   return _c("tr", { key: content.id }, [
                     _c("td", [_vm._v(_vm._s(content.id))]),
                     _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(content.status))]),
+                    _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(content.title))]),
                     _vm._v(" "),
                     _c("td", { attrs: { width: "150" } }, [
@@ -18409,6 +18413,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("th", [_vm._v("Id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Status")]),
       _vm._v(" "),
       _c("th", [_vm._v("Title")]),
       _vm._v(" "),
@@ -18551,6 +18557,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -18564,6 +18577,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             form: {
                 id: '',
+                status: '',
                 title: '',
                 description: '',
                 url: ''
@@ -18630,6 +18644,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('/api/manage/articles/edit/' + id).then(function (response) {
                 var data = response.data.data;
                 self.form.id = id;
+                self.form.status = data.status;
                 self.form.title = data.title;
                 self.form.description = data.description;
                 self.form.url = data.url;
@@ -18644,6 +18659,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (self.form.id !== "" && self.form.title !== "" && self.form.description !== "") {
                 axios.post('/api/manage/articles/save/' + self.form.id, {
                     id: self.form.id,
+                    status: self.form.status,
                     title: self.form.title,
                     description: self.form.description,
                     url: self.form.url
@@ -18807,6 +18823,55 @@ var render = function() {
                             }
                           }
                         })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 mb-3" }, [
+                        _c("label", { attrs: { for: "status" } }, [
+                          _vm._v("Status")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.status,
+                                expression: "form.status"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "status",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "draft" } }, [
+                              _vm._v("draft")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "publish" } }, [
+                              _vm._v("publish")
+                            ])
+                          ]
+                        )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-12 mb-3" }, [
