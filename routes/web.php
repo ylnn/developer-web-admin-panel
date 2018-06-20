@@ -12,8 +12,7 @@ Route::get('/manage', 'ManageController@index');
 Route::get('/image/{h}/{w}/{filename}','ImageCacheController@show')
 ->where('h', '[0-9]+')
 ->where('w', '[0-9]+')
-->where('filename', '[a-zA-Z0-9.]+')
-;
+->where('filename', '[a-zA-Z0-9.]+');
 
 // Auth::routes();
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
