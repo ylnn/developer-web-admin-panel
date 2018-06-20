@@ -60,18 +60,18 @@ class ImageRepository
     public function replaceImages($i = 0)
     {
         $articleImages = $this->article->images;
-        $imageSize = $this->imageSize;
 
-        $this->newContent = preg_replace_callback("/\[image\|?(.*?)\]/", function($matches) use ($articleImages, $imageSize) {
+        $this->newContent = preg_replace_callback("/\[image\|?(.*?)\]/", function($matches) use ($articleImages) {
             global $i;
             $i++;
             if(isset($articleImages[$i-1])) {
                 $filename =  $articleImages[$i-1]->filename;
                 $alt = $matches[1] ?? '';
                 $image_url = url('image');
-                return "<img class=\"img-fluid\" src=\"$image_url/$imageSize/$filename\" alt=\"$alt\">";
+                return "<img class=\"img-fluid\" src=\"$image_url/$filename\" alt=\"$alt\">";
             }
             return '!!! IMAGE NOT FOUND !!!';
         }, $this->article->description);   
+
     }
 }
