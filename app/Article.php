@@ -24,4 +24,9 @@ class Article extends Model
         // strip tags, str_limit, remove image tags with preg_replace...
         return preg_replace('/\[image\|?(.*?)\]/', '', str_limit(strip_tags($this->description), 300));
     }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'publish');   
+    }
 }
