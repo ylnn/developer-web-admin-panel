@@ -41,4 +41,10 @@ class ImageCacheController extends Controller
 
         return Image::make($savedImage)->response();
     }    
+
+    public function showNormalImage(Request $request, $filename)
+    {
+        $originalPath = storage_path('app/public/images/'.$filename);
+        return Image::make($originalPath)->response();
+    }
 }
