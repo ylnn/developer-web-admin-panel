@@ -12,14 +12,28 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $articles = Article::latest()->get();
+        $articles = Article::published()->latest()->get();
         $variables = Variable::all();
         $skills = Skill::query()->orderBy('order', 'ASC')->get();
         return view('front.home', compact('articles', 'variables', 'skills'));
     }
 
-    public function article(Article $article, ImageRepository $repo)
+    public function article($articleID, ImageRepository $repo)
     {
+        $user = request()->user();
+
+        // logged in user can see draft record for preview.
+        if($user === null) {
+            $article = Article::where('id', $articleID)->published()->first();
+        } else {
+            $article = Article::where('id', $articleID)->first();
+        }
+
+        if($article === null){
+            print('not found');
+            return;
+        }
+
         $variables = Variable::all();
 
         $replaced = $repo->mapImages($variables, $article);
