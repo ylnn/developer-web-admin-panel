@@ -25,8 +25,12 @@ class Article extends Model
         return preg_replace('/\[image\|?(.*?)\]/', '', str_limit(strip_tags($this->description), 300));
     }
 
-    public function scopePublished($query)
+    public function scopePublished($query, $user)
     {
-        return $query->where('status', 'publish');   
+        if ($user === null) {
+            return $query->where('status', 'publish');   
+        }
+
+        return $query;
     }
 }
