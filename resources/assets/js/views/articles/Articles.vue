@@ -12,12 +12,14 @@
                         <table class="table">
                             <thead>
                                 <th>Id</th>
+                                <th>Status</th>
                                 <th>Title</th>
                                 <th width="150">Action</th>
                             </thead>
                             <tbody>
                                 <tr  v-for="content in contents" v-bind:key="content.id">
                                     <td>{{ content.id }}</td>
+                                    <td>{{ content.status }}</td>
                                     <td>{{ content.title }}</td>
                                     <td width="150">
                                         <button class="btn btn-sm btn-warning" @click="edit(content.id)">Edit</button> 
