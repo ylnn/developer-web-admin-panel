@@ -51,7 +51,7 @@
                             </thead>
                             <tbody>
                                 <tr  v-for="file in remotePhotos" v-bind:key="file.id">
-                                    <td><a target="_blankx" :href="'/image/'+ file.filename"> <img :src="'/image/120/120/'+ file.filename" alt=""></a></td>
+                                    <td><a target="_blank" :href="'/image/'+ file.filename"> <img :src="'/image/120/120/'+ file.filename" alt=""></a></td>
                                     <td>{{ file.filename }}</td>
                                     <td>
                                         <button class="btn btn-sm btn-danger" @click="remove(file.id)">Delete</button> 

@@ -19558,7 +19558,7 @@ var render = function() {
                         "a",
                         {
                           attrs: {
-                            target: "_blankx",
+                            target: "_blank",
                             href: "/image/" + file.filename
                           }
                         },
