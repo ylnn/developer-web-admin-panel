@@ -19279,6 +19279,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         showingForm: function showingForm(newSt, oldSt) {
             if (newSt == false) {
                 this.get_all();
+                this.uploadedPhotosInformation = [];
+                this.clear_form();
             }
         }
     },

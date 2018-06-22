@@ -97,6 +97,8 @@ import Modal from './../../components/Modal';
             showingForm: function (newSt, oldSt) {
                 if(newSt == false){
                     this.get_all();
+                    this.uploadedPhotosInformation = [];
+                    this.clear_form();
                 }
             }
         },
