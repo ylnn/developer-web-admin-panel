@@ -39,7 +39,7 @@
                                                             <p>Selected photos <span class="badge badge-secondary" >{{selectPhotoStatus}}</span></p>
                                                         </div>
                                                         <div class="col-1" v-for="(file, index) in selectedPhotos" v-bind:key="file.id">
-                                                            <span><img v-on:click="removeImageFromSelected(index)" :src="'/image/50/50/'+ file.filename" alt=""></span>
+                                                            <span><img v-on:click="removeImageFromSelected(index)" :src="'/image/150/150/'+ file.filename" alt=""></span>
                                                         </div>
                                                         <div class="col-6" v-if="selectedPhotos.length == 0">None</div>
                                                     </div>
@@ -49,7 +49,7 @@
                                                                 <p>Uploaded Photos (click for add)</p>
                                                         </div>
                                                         <div class="col-1" v-for="file in remotePhotos" v-bind:key="file.id">
-                                                            <span><img v-on:click="addImageToSelected(file)" :src="'/image/50/50/'+ file.filename" alt=""></span>
+                                                            <span><img v-on:click="addImageToSelected(file)" :src="'/image/150/150/'+ file.filename" alt=""></span>
                                                         </div>
                                                     </div>
                                                 </div>

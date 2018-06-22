@@ -18955,7 +18955,7 @@ var render = function() {
                                   _c("span", [
                                     _c("img", {
                                       attrs: {
-                                        src: "/image/50/50/" + file.filename,
+                                        src: "/image/150/150/" + file.filename,
                                         alt: ""
                                       },
                                       on: {
@@ -18992,7 +18992,7 @@ var render = function() {
                                   _c("span", [
                                     _c("img", {
                                       attrs: {
-                                        src: "/image/50/50/" + file.filename,
+                                        src: "/image/150/150/" + file.filename,
                                         alt: ""
                                       },
                                       on: {
