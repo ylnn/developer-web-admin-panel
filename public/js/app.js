@@ -18950,12 +18950,12 @@ var render = function() {
                             _vm._l(_vm.selectedPhotos, function(file, index) {
                               return _c(
                                 "div",
-                                { key: file.id, staticClass: "col-1" },
+                                { key: file.id, staticClass: "col-2" },
                                 [
                                   _c("span", [
                                     _c("img", {
                                       attrs: {
-                                        src: "/image/150/150/" + file.filename,
+                                        src: "/image/100/100/" + file.filename,
                                         alt: ""
                                       },
                                       on: {
@@ -18987,12 +18987,12 @@ var render = function() {
                             _vm._l(_vm.remotePhotos, function(file) {
                               return _c(
                                 "div",
-                                { key: file.id, staticClass: "col-1" },
+                                { key: file.id, staticClass: "col-2" },
                                 [
                                   _c("span", [
                                     _c("img", {
                                       attrs: {
-                                        src: "/image/150/150/" + file.filename,
+                                        src: "/image/100/100/" + file.filename,
                                         alt: ""
                                       },
                                       on: {
