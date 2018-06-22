@@ -30,6 +30,7 @@
                             @empty
                                 &nbsp;
                             @endforelse
+
                         </div>
                     </div>
                 </div>
@@ -79,6 +80,9 @@
         </div>
 
         <div class="content">
+            @auth()
+                <a href="{{route('admin')}}" class="btn btn-info">Admin Panel</a>
+            @endif
             @yield('content')
         </div>
 

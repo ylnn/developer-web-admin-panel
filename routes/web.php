@@ -6,7 +6,7 @@ Route::get('/', 'FrontController@index')->name('main');
 Route::get('/article/{article}/{slug?}', 'FrontController@article')->name('article.detail');
 
 
-Route::get('/manage', 'ManageController@index');
+Route::get('/manage', 'ManageController@index')->name('admin');
 
 // show images
 Route::get('/image/{h}/{w}/{filename}','ImageCacheController@show')
