@@ -20,21 +20,27 @@
                         </div>
                         <div>
 
-                            <modal v-if="showingForm" @close="showingForm = false">
+                            <modal v-if="showingForm" @close="showingForm = false" ref="modal">
                                 <h2 slot="header">Image</h2>
                                 <div class="box" slot="body">
                                     <div class="col-md-12 mb-3">
                                         <label for="title">Upload Image</label>
-                                        <input type="file" class="form-control" ref="file" required v-on:change="newFile" accept="image/*">
+                                        <input type="file" class="form-control" multiple ref="file" required v-on:change="newFile" accept="image/*">
                                     </div>
-<!--                                                 <div class="col-md-3 mb-3 d-flex flex-column justify-content-end">
-                                                    <button class="btn btn-primary" @click="post_form">Upload</button>
-                                                </div> -->
-
-                                    
+                                    <div class="col-md-12">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Filename</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            <tr v-for="(info, index) in uploadedPhotosInformation" v-bind:key="index">
+                                                <td>{{ info.filename }}</td>
+                                                <td>{{ info.status }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </modal>
-
                             
                         </div>
                         <table class="table">
@@ -45,7 +51,7 @@
                             </thead>
                             <tbody>
                                 <tr  v-for="file in remotePhotos" v-bind:key="file.id">
-                                    <td> <img :src="'/image/50/50/'+ file.filename" alt=""> </td>
+                                    <td> <img :src="'/image/120/120/'+ file.filename" alt=""> </td>
                                     <td>{{ file.filename }}</td>
                                     <td>
                                         <button class="btn btn-sm btn-danger" @click="remove(file.id)">Delete</button> 
@@ -77,11 +83,22 @@ import Modal from './../../components/Modal';
                 alertMessageStatus : 'warning',
                 
                 remotePhotos: [],
-                uploadPhotos: []
+                uploadPhotos: [],
+
+                uploadedPhotosInformation: []
             }
         },
         created() {
             this.get_all();
+        },
+
+        watch: {
+            // whenever question changes, this function will run
+            showingForm: function (newSt, oldSt) {
+                if(newSt == false){
+                    this.get_all();
+                }
+            }
         },
 
         methods: {
@@ -113,10 +130,19 @@ import Modal from './../../components/Modal';
                       .then(({data}) => self.remotePhotos  = data.data);
             },
 
+            // set info
+
+            setUploadInfo(filename, status){
+                let self = this;
+                self.uploadedPhotosInformation.push({'filename': filename, 'status': status})                
+            },
+
             // SAVE - save or update content with id
             post_form: function() {
                 // console.log(this.uploadPhotos);
                 let self = this;
+
+                let uploadError = false;
 
                 for (let file of this.uploadPhotos){
 
@@ -126,19 +152,24 @@ import Modal from './../../components/Modal';
                     axios.post('/api/manage/images/save', data)
                         .then(function(response){
                             console.log('upload success');
-                            self.get_all();
-                            self.showAlert('Uploaded');
-                            self.clear_form();
-                            self.showingForm = false;
+                            // self.get_all();
+                            // self.showAlert('Uploaded');
+                            // self.clear_form();
+                            // self.showingForm = false;
+                            self.setUploadInfo(file.name, 'OK');
                         })
                         .catch(
                         function(reason) {
-                            self.showAlert('Upload ERROR');
+                            // self.showAlert('Upload ERROR');
                             console.log('Handle rejected promise ('+reason+') here.');
-                            self.clear_form();
-                            self.showingForm = false;
+                            // self.clear_form();
+                            // self.showingForm = false;
+                            // uploadError = true;
+                            self.setUploadInfo(file.name, 'ERR');
                         });
                 }
+
+                console.log('... for end');
 
             },
 

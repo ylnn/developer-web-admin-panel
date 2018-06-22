@@ -19242,6 +19242,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -19258,13 +19264,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             alertMessageStatus: 'warning',
 
             remotePhotos: [],
-            uploadPhotos: []
+            uploadPhotos: [],
+
+            uploadedPhotosInformation: []
         };
     },
     created: function created() {
         this.get_all();
     },
 
+
+    watch: {
+        // whenever question changes, this function will run
+        showingForm: function showingForm(newSt, oldSt) {
+            if (newSt == false) {
+                this.get_all();
+            }
+        }
+    },
 
     methods: {
 
@@ -19300,10 +19317,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
 
+        // set info
+
+        setUploadInfo: function setUploadInfo(filename, status) {
+            var self = this;
+            self.uploadedPhotosInformation.push({ 'filename': filename, 'status': status });
+        },
+
+
         // SAVE - save or update content with id
         post_form: function post_form() {
             // console.log(this.uploadPhotos);
             var self = this;
+
+            var uploadError = false;
+
+            var _loop = function _loop(file) {
+
+                var data = new FormData();
+                data.set('file', file);
+
+                axios.post('/api/manage/images/save', data).then(function (response) {
+                    console.log('upload success');
+                    // self.get_all();
+                    // self.showAlert('Uploaded');
+                    // self.clear_form();
+                    // self.showingForm = false;
+                    self.setUploadInfo(file.name, 'OK');
+                }).catch(function (reason) {
+                    // self.showAlert('Upload ERROR');
+                    console.log('Handle rejected promise (' + reason + ') here.');
+                    // self.clear_form();
+                    // self.showingForm = false;
+                    // uploadError = true;
+                    self.setUploadInfo(file.name, 'ERR');
+                });
+            };
 
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -19313,22 +19362,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 for (var _iterator = this.uploadPhotos[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var file = _step.value;
 
-
-                    var data = new FormData();
-                    data.set('file', file);
-
-                    axios.post('/api/manage/images/save', data).then(function (response) {
-                        console.log('upload success');
-                        self.get_all();
-                        self.showAlert('Uploaded');
-                        self.clear_form();
-                        self.showingForm = false;
-                    }).catch(function (reason) {
-                        self.showAlert('Upload ERROR');
-                        console.log('Handle rejected promise (' + reason + ') here.');
-                        self.clear_form();
-                        self.showingForm = false;
-                    });
+                    _loop(file);
                 }
             } catch (err) {
                 _didIteratorError = true;
@@ -19344,6 +19378,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 }
             }
+
+            console.log('... for end');
         },
 
         remove: function remove(id) {
@@ -19415,9 +19451,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                " +
+                        "\n                            " +
                           _vm._s(_vm.alertMessage) +
-                          "\n                                "
+                          "\n                            "
                       )
                     ]
                   )
@@ -19432,6 +19468,7 @@ var render = function() {
                   ? _c(
                       "modal",
                       {
+                        ref: "modal",
                         on: {
                           close: function($event) {
                             _vm.showingForm = false
@@ -19463,11 +19500,40 @@ var render = function() {
                                 staticClass: "form-control",
                                 attrs: {
                                   type: "file",
+                                  multiple: "",
                                   required: "",
                                   accept: "image/*"
                                 },
                                 on: { change: _vm.newFile }
                               })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c(
+                                "table",
+                                { staticClass: "table" },
+                                [
+                                  _c("tr", [
+                                    _c("th", [_vm._v("Filename")]),
+                                    _vm._v(" "),
+                                    _c("th", [_vm._v("Status")])
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(
+                                    _vm.uploadedPhotosInformation,
+                                    function(info, index) {
+                                      return _c("tr", { key: index }, [
+                                        _c("td", [
+                                          _vm._v(_vm._s(info.filename))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [_vm._v(_vm._s(info.status))])
+                                      ])
+                                    }
+                                  )
+                                ],
+                                2
+                              )
                             ])
                           ]
                         )
@@ -19487,7 +19553,10 @@ var render = function() {
                   return _c("tr", { key: file.id }, [
                     _c("td", [
                       _c("img", {
-                        attrs: { src: "/image/50/50/" + file.filename, alt: "" }
+                        attrs: {
+                          src: "/image/120/120/" + file.filename,
+                          alt: ""
+                        }
                       })
                     ]),
                     _vm._v(" "),
