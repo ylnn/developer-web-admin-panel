@@ -19554,12 +19554,23 @@ var render = function() {
                 _vm._l(_vm.remotePhotos, function(file) {
                   return _c("tr", { key: file.id }, [
                     _c("td", [
-                      _c("img", {
-                        attrs: {
-                          src: "/image/120/120/" + file.filename,
-                          alt: ""
-                        }
-                      })
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            target: "_blankx",
+                            href: "/image/" + file.filename
+                          }
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: "/image/120/120/" + file.filename,
+                              alt: ""
+                            }
+                          })
+                        ]
+                      )
                     ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(file.filename))]),
