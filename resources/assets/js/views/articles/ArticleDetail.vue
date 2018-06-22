@@ -179,9 +179,9 @@
                     })
                     .then(function (response) {
                         self.showAlert('Saved.', 'success');
-                        setTimeout(() => {
-                            self.$router.push({ name: 'articles'});
-                        }, 1500);
+                        // setTimeout(() => {
+                        //     self.$router.push({ name: 'articles'});
+                        // }, 1500);
                     });
                 }
             },

@@ -18665,9 +18665,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     url: self.form.url
                 }).then(function (response) {
                     self.showAlert('Saved.', 'success');
-                    setTimeout(function () {
-                        self.$router.push({ name: 'articles' });
-                    }, 1500);
+                    // setTimeout(() => {
+                    //     self.$router.push({ name: 'articles'});
+                    // }, 1500);
                 });
             }
         },
