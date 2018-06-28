@@ -18935,7 +18935,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             name: "summary",
-                            id: "excert",
+                            id: "summary",
                             cols: "30",
                             rows: "10"
                           },
