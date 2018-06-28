@@ -31,7 +31,7 @@
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <label for="excerpt">Excerpt</label>
-                                                    <textarea name="excerpt" id="excert" cols="30" rows="10" class="form-control"></textarea>
+                                                    <textarea name="excerpt" id="excert" cols="30" rows="10" class="form-control" v-model="form.excerpt"></textarea>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <label for="description">Description</label>

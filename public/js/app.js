@@ -18918,7 +18918,38 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _vm._m(0),
+                      _c("div", { staticClass: "col-md-12 mb-3" }, [
+                        _c("label", { attrs: { for: "excerpt" } }, [
+                          _vm._v("Excerpt")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.excerpt,
+                              expression: "form.excerpt"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            name: "excerpt",
+                            id: "excert",
+                            cols: "30",
+                            rows: "10"
+                          },
+                          domProps: { value: _vm.form.excerpt },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "excerpt", $event.target.value)
+                            }
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -18992,7 +19023,7 @@ var render = function() {
                           "div",
                           { staticClass: "row justify-content-start" },
                           [
-                            _vm._m(1),
+                            _vm._m(0),
                             _vm._v(" "),
                             _vm._l(_vm.remotePhotos, function(file) {
                               return _c(
@@ -19114,19 +19145,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12 mb-3" }, [
-      _c("label", { attrs: { for: "excerpt" } }, [_vm._v("Excerpt")]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { name: "excerpt", id: "excert", cols: "30", rows: "10" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
