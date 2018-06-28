@@ -18564,6 +18564,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -18579,6 +18583,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 id: '',
                 status: '',
                 title: '',
+                excerpt: '',
                 description: '',
                 url: ''
             },
@@ -18645,6 +18650,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var data = response.data.data;
                 self.form.id = id;
                 self.form.status = data.status;
+                self.form.excerpt = data.excerpt;
                 self.form.title = data.title;
                 self.form.description = data.description;
                 self.form.url = data.url;
@@ -18660,6 +18666,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.post('/api/manage/articles/save/' + self.form.id, {
                     id: self.form.id,
                     status: self.form.status,
+                    excerpt: self.form.excerpt,
                     title: self.form.title,
                     description: self.form.description,
                     url: self.form.url
@@ -18682,6 +18689,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         clear_form: function clear_form() {
             this.form.id = "";
             this.form.title = "";
+            this.form.excerpt = "";
             this.form.description = "";
             this.form.url = "";
         },
@@ -18910,6 +18918,8 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
+                      _vm._m(0),
+                      _vm._v(" "),
                       _c(
                         "div",
                         { staticClass: "col-md-12 mb-3" },
@@ -18982,7 +18992,7 @@ var render = function() {
                           "div",
                           { staticClass: "row justify-content-start" },
                           [
-                            _vm._m(0),
+                            _vm._m(1),
                             _vm._v(" "),
                             _vm._l(_vm.remotePhotos, function(file) {
                               return _c(
@@ -19104,6 +19114,19 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12 mb-3" }, [
+      _c("label", { attrs: { for: "excerpt" } }, [_vm._v("Excerpt")]),
+      _vm._v(" "),
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: { name: "excerpt", id: "excert", cols: "30", rows: "10" }
+      })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

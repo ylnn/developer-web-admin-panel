@@ -30,6 +30,10 @@
                                                     <input type="text" class="form-control" ref="title" id="title" placeholder="" value="" required v-model="form.title" autofocus>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
+                                                    <label for="excerpt">Excerpt</label>
+                                                    <textarea name="excerpt" id="excert" cols="30" rows="10" class="form-control"></textarea>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
                                                     <label for="description">Description</label>
                                                     <wysiwyg v-model="form.description" />
                                                 </div>
@@ -93,6 +97,7 @@
                     id: '',
                     status: '',
                     title: '',
+                    excerpt: '',
                     description: '',
                     url: ''
                 },
@@ -158,6 +163,7 @@
                             let data = response.data.data;
                             self.form.id = id;
                             self.form.status = data.status;
+                            self.form.excerpt = data.excerpt;
                             self.form.title = data.title;
                             self.form.description = data.description;
                             self.form.url = data.url;
@@ -173,6 +179,7 @@
                     axios.post('/api/manage/articles/save/' + self.form.id, {
                         id: self.form.id,
                         status: self.form.status,
+                        excerpt: self.form.excerpt,
                         title: self.form.title,
                         description: self.form.description,
                         url: self.form.url,
@@ -197,6 +204,7 @@
             clear_form: function() {
                 this.form.id = "";
                 this.form.title = "";
+                this.form.excerpt = "";
                 this.form.description = "";
                 this.form.url = "";
             },
