@@ -18568,6 +18568,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -18923,7 +18924,7 @@ var render = function() {
                           _vm._v("Excerpt")
                         ]),
                         _vm._v(" "),
-                        _c("textarea", {
+                        _c("input", {
                           directives: [
                             {
                               name: "model",
@@ -18932,12 +18933,15 @@ var render = function() {
                               expression: "form.summary"
                             }
                           ],
+                          ref: "summary",
                           staticClass: "form-control",
                           attrs: {
-                            name: "summary",
+                            type: "text",
                             id: "summary",
-                            cols: "30",
-                            rows: "10"
+                            placeholder: "",
+                            value: "",
+                            required: "",
+                            autofocus: ""
                           },
                           domProps: { value: _vm.form.summary },
                           on: {

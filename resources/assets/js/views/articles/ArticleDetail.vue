@@ -31,7 +31,8 @@
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <label for="summary">Excerpt</label>
-                                                    <textarea name="summary" id="summary" cols="30" rows="10" class="form-control" v-model="form.summary"></textarea>
+                                                    <input type="text" class="form-control" ref="summary" id="summary" placeholder="" value="" required v-model="form.summary" autofocus>
+                                                    <!-- <textarea name="summary" id="summary" cols="30" rows="10" class="form-control" v-model="form.summary"></textarea> -->
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <label for="description">Description</label>
