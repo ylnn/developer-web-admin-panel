@@ -18583,7 +18583,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 id: '',
                 status: '',
                 title: '',
-                excerpt: '',
+                summary: '',
                 description: '',
                 url: ''
             },
@@ -18650,7 +18650,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var data = response.data.data;
                 self.form.id = id;
                 self.form.status = data.status;
-                self.form.excerpt = data.excerpt;
+                self.form.summary = data.summary;
                 self.form.title = data.title;
                 self.form.description = data.description;
                 self.form.url = data.url;
@@ -18666,7 +18666,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.post('/api/manage/articles/save/' + self.form.id, {
                     id: self.form.id,
                     status: self.form.status,
-                    excerpt: self.form.excerpt,
+                    summary: self.form.summary,
                     title: self.form.title,
                     description: self.form.description,
                     url: self.form.url
@@ -18689,7 +18689,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         clear_form: function clear_form() {
             this.form.id = "";
             this.form.title = "";
-            this.form.excerpt = "";
+            this.form.summary = "";
             this.form.description = "";
             this.form.url = "";
         },
@@ -18919,7 +18919,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-12 mb-3" }, [
-                        _c("label", { attrs: { for: "excerpt" } }, [
+                        _c("label", { attrs: { for: "summary" } }, [
                           _vm._v("Excerpt")
                         ]),
                         _vm._v(" "),
@@ -18928,24 +18928,24 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.excerpt,
-                              expression: "form.excerpt"
+                              value: _vm.form.summary,
+                              expression: "form.summary"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            name: "excerpt",
+                            name: "summary",
                             id: "excert",
                             cols: "30",
                             rows: "10"
                           },
-                          domProps: { value: _vm.form.excerpt },
+                          domProps: { value: _vm.form.summary },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.form, "excerpt", $event.target.value)
+                              _vm.$set(_vm.form, "summary", $event.target.value)
                             }
                           }
                         })
